@@ -210,10 +210,10 @@
     {/if}
     
     {#if isMobile}
-  <!-- Keep flex-grow but add bottom margin to push content up -->
-  <div class="flex-grow mb-50"></div>
-  
-  <NumberPad bind:userAnswer {isEmpty} on:input={e => handleNumberPadInput(e.detail)} />
-{/if}
+      <!-- Spacer that takes up remaining space on mobile -->
+      <div class="h-2"></div>
+      
+      <NumberPad bind:userAnswer {isEmpty} on:input={e => handleNumberPadInput(e.detail)} />
+    {/if}
   </div>
 </div>
