@@ -8,53 +8,35 @@
 	onMount(() => {
 		if (!browser) return;
 		
-		// Prevent all zoom gestures
-		const preventZoom = (e: TouchEvent) => {
+		// Only prevent pinch zoom, which shouldn't interfere with normal tapping
+		const preventPinchZoom = (e: TouchEvent) => {
 			if (e.touches.length > 1) {
 				e.preventDefault();
 			}
 		};
 		
-		// Prevent double-tap zoom
-		const preventDoubleTapZoom = (() => {
-			let lastTap = 0;
-			return (e: TouchEvent) => {
-				const now = Date.now();
-				const DOUBLE_TAP_THRESHOLD = 300;
-				if (now - lastTap < DOUBLE_TAP_THRESHOLD) {
-					e.preventDefault();
-				}
-				lastTap = now;
-			};
-		})();
-		
-		// Add event listeners with passive: false to allow preventDefault
-		document.addEventListener('touchstart', preventZoom, { passive: false });
-		document.addEventListener('touchmove', preventZoom, { passive: false });
-		document.addEventListener('touchend', preventDoubleTapZoom, { passive: false });
-		
-		// Add styles directly to the document instead of using a global style
+		// Add touch-action CSS to prevent all browser zooming behaviors
 		if (document.head) {
 			const style = document.createElement('style');
 			style.innerHTML = `
-				body {
-					-webkit-touch-callout: none;
-					-webkit-user-select: none;
-					-khtml-user-select: none;
-					-moz-user-select: none;
-					-ms-user-select: none;
-					user-select: none;
+				* {
+					touch-action: pan-x pan-y;
+				}
+				.no-zoom {
 					touch-action: manipulation;
 				}
 			`;
 			document.head.appendChild(style);
+			
+			// Add the no-zoom class to the body
+			document.body.classList.add('no-zoom');
 		}
 		
+		// Only prevent multi-touch (pinch) gestures
+		document.addEventListener('touchstart', preventPinchZoom, { passive: false });
+		
 		return () => {
-			// Clean up event listeners when component unmounts
-			document.removeEventListener('touchstart', preventZoom);
-			document.removeEventListener('touchmove', preventZoom);
-			document.removeEventListener('touchend', preventDoubleTapZoom);
+			document.removeEventListener('touchstart', preventPinchZoom);
 		};
 	});
 </script>
