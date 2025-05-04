@@ -27,7 +27,7 @@
   }
 </script>
 
-<div class="bg-white p-2 rounded-lg shadow-md grid grid-cols-3 gap-1 mb-2 pb-6">
+<div class="bg-white p-2 rounded-lg shadow-md grid grid-cols-3 gap-1 mb-2">
   {#each buttons as button}
     <button 
       on:click={() => handleClick(button)}

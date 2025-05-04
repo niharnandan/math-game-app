@@ -106,7 +106,7 @@
   }
 </script>
 
-<div class="bg-white p-3 rounded-lg shadow-md mb-3">
+<div class="bg-white p-3 rounded-lg shadow-md {isMobile ? 'mb-1' : 'mb-3'}">
   <div class="text-xl font-bold text-center mb-3">{question}</div>
   
   <form on:submit={handleSubmit} class="flex">
@@ -128,11 +128,7 @@
       placeholder="Your answer"
     />
     
-    <button 
-      type="submit"
-      class="ml-2 px-4 py-2 rounded-md {userAnswer.trim() === '' ? 'bg-gray-400 cursor-not-allowed' : 'bg-blue-500 hover:bg-blue-600 text-white'}"
-      disabled={userAnswer.trim() === ''}
-    >
+    <button class="ml-2 px-4 py-2 rounded-md {userAnswer.trim() === '' ? 'bg-gray-400 cursor-not-allowed' : 'bg-blue-500 hover:bg-blue-600 text-white'} {isMobile ? 'hidden' : ''}" disabled={userAnswer.trim() === ''}>
       Submit
     </button>
   </form>
