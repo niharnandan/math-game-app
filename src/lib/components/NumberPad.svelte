@@ -1,8 +1,8 @@
-<!-- NumberPad.svelte (updated for mobile) -->
 <script lang="ts">
   import { createEventDispatcher } from 'svelte';
   
   export let userAnswer: string = '';
+  export let isEmpty: boolean = true;
   
   const dispatch = createEventDispatcher();
   
@@ -27,11 +27,11 @@
   }
 </script>
 
-<div class="bg-white p-2 rounded-lg shadow-md grid grid-cols-3 gap-1 mt-3">
+<div class="bg-white p-2 rounded-lg shadow-md grid grid-cols-3 gap-1 mb-2">
   {#each buttons as button}
     <button 
       on:click={() => handleClick(button)}
-      class="p-2 text-lg rounded-md {button === 'delete' ? 'bg-red-500 text-white' : 'bg-gray-200'} {button === '-' && userAnswer !== '' ? 'opacity-50' : ''}"
+      class="p-3 text-xl rounded-md {button === 'delete' ? 'bg-red-500 text-white' : 'bg-gray-200'} {button === '-' && userAnswer !== '' ? 'opacity-50' : ''}"
       disabled={button === '-' && userAnswer !== ''}
     >
       {#if button === 'delete'}
@@ -44,7 +44,8 @@
   
   <button 
     on:click={() => dispatch('input', 'submit')}
-    class="col-span-3 p-2 text-lg bg-blue-500 text-white rounded-md mt-1"
+    class="col-span-3 p-3 text-xl rounded-md mt-1 {isEmpty ? 'bg-gray-400 cursor-not-allowed' : 'bg-blue-500 text-white'}"
+    disabled={isEmpty}
   >
     Submit
   </button>

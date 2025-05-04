@@ -15,6 +15,9 @@
 	let isMobile = false;
 	let isLoadingMoreQuestions = false;
 	
+	// Calculate if input is empty
+	$: isEmpty = userAnswer.trim() === '';
+	
 	// Check if we're on mobile
 	onMount(() => {
 	  if (browser) {
@@ -186,32 +189,31 @@
 	}
   </script>
   
-  <div class="min-h-screen max-h-screen overflow-hidden bg-gray-100 flex flex-col items-center pt-2 px-2">
+  <div class="h-screen max-h-screen flex flex-col bg-gray-100 px-2 pt-2 pb-0">
 	<h1 class="text-2xl font-bold text-center mb-3">Math Challenge</h1>
 	
-	<div class="w-full max-w-md flex-1 flex flex-col">
+	<div class="w-full flex flex-col flex-1">
 	  <StreakTracker {currentStreak} {longestStreak} />
 	  
-	  <div class="flex-1 flex flex-col">
-		{#if questions.length > currentQuestionIndex}
-		  <Question 
-			question={questions[currentQuestionIndex].question} 
-			bind:userAnswer 
-			bind:isIncorrect
-			bind:isCorrect
-			on:submit={checkAnswer} 
-		  />
-		{:else}
-		  <div class="text-center p-4 bg-white rounded-lg shadow">
-			<p>Loading questions...</p>
-		  </div>
-		{/if}
-		
-		{#if isMobile}
-		  <div class="mt-auto">
-			<NumberPad bind:userAnswer on:input={e => handleNumberPadInput(e.detail)} />
-		  </div>
-		{/if}
-	  </div>
+	  {#if questions.length > currentQuestionIndex}
+		<Question 
+		  question={questions[currentQuestionIndex].question} 
+		  bind:userAnswer 
+		  bind:isIncorrect
+		  bind:isCorrect
+		  on:submit={checkAnswer} 
+		/>
+	  {:else}
+		<div class="text-center p-4 bg-white rounded-lg shadow">
+		  <p>Loading questions...</p>
+		</div>
+	  {/if}
+	  
+	  <!-- Spacer that takes up remaining space -->
+	  <div class="flex-grow"></div>
+	  
+	  {#if isMobile}
+		<NumberPad bind:userAnswer {isEmpty} on:input={e => handleNumberPadInput(e.detail)} />
+	  {/if}
 	</div>
   </div>
