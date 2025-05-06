@@ -7,7 +7,7 @@ export const POST: RequestHandler = async ({ request, fetch }) => {
   try {
     // Define system prompt for Claude
     const systemPromptContent = `
-      You are a math question generator for kids. Generate 10 math problems with their answers.
+      You are a difficult math question generator for adults. Generate 10 math problems with their answers.
       Each problem should have 1 to 4 operators (+ - × ÷) and numbers between -10 and 50.
       Questions should involve order of operations (PEMDAS). The answers can be negative from -50 to 50. If multiplying or dividing
       with a negative number, be sure to write the question as 4 × (-2) with parenthesis around the negative number.

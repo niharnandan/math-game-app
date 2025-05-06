@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { onMount, onDestroy } from 'svelte';
+	import { goto } from '$app/navigation';
 	import Question from '$lib/components/Question.svelte';
 	import NumberPad from '$lib/components/NumberPad.svelte';
 	import StreakTracker from '$lib/components/StreakTracker.svelte';
@@ -187,10 +188,27 @@
       userAnswer += value;
     }
   }
+  
+  function navigateToAbout() {
+    goto('/about');
+  }
 </script>
 
 <div class="min-h-screen bg-gray-100 flex flex-col items-center {isMobile ? 'pt-2 px-2 pb-0' : 'pt-8 px-4'}">
-  <h1 class="text-3xl font-bold text-center mb-8">Math Challenge</h1>
+  <div class="flex items-center justify-center mb-6 w-full max-w-md relative">
+    <a href="/" class="text-center">
+      <h1 class="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500">
+        NumberMasters
+      </h1>
+    </a>
+    <button 
+      on:click={navigateToAbout}
+      class="ml-2 text-xl rounded-full w-6 h-6 flex items-center justify-center bg-gray-200 hover:bg-gray-300 text-gray-600"
+      aria-label="About this game"
+    >
+      ?
+    </button>
+  </div>
   
   <div class="w-full max-w-md {isMobile ? 'flex flex-col flex-1' : ''}">
     <StreakTracker {currentStreak} {longestStreak} />
