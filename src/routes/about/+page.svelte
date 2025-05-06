@@ -6,7 +6,7 @@
     <div class="w-full max-w-2xl">
       <div class="flex items-center justify-center mb-8">
         <a href="/" class="text-center">
-          <h1 class="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500">
+          <h1 class="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-500 via-teal-400 to-emerald-500">
             NumberMasters
           </h1>
         </a>

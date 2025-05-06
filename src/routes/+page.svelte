@@ -197,7 +197,7 @@
 <div class="min-h-screen bg-gray-100 flex flex-col items-center {isMobile ? 'pt-2 px-2 pb-0' : 'pt-8 px-4'}">
   <div class="flex items-center justify-center mb-6 w-full max-w-md relative">
     <a href="/" class="text-center">
-      <h1 class="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500">
+      <h1 class="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-500 via-teal-400 to-emerald-500">
         NumberMasters
       </h1>
     </a>
